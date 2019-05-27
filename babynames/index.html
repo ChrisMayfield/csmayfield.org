@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baby Names</title>
+    <script src="counts.js"></script>
+    <script src="bchart.js"></script>
+    <script src="sounds.js"></script>
+    <script src="trends.js"></script>
+    <script src="search.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h3>Baby Names</h3>
+
+<form onsubmit="search(); return false;">
+    <input type="button" value="Random" onclick="random();">
+    &nbsp;&nbsp;
+    <input id="name" type="text">
+    <input id="F" type="radio" name="gend" checked>Girl
+    <input id="M" type="radio" name="gend">Boy
+    &nbsp;&nbsp;
+    <input type="button" value="Search" onclick="search();">
+    &nbsp;&nbsp;
+    <a href="about.html" target="_blank"><b>About</b></a>
+</form>
+
+<table id="t0" style="display: none">
+<tr>
+    <td valign="top" width="30%">
+        <h3>Search Results</h3>
+        <table id="t1"></table>
+    </td>
+    <td valign="top" width="30%">
+        <h3>Sounds Like</h3>
+        <table id="t2"></table>
+    </td>
+    <td valign="top" width="40%">
+        <h3>Trends Like</h3>
+        <table id="t3"></table>
+    </td>
+</tr>
+</table>
+
+</body>
+</html>

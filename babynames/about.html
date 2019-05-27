@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Baby Names</title>
+    <script src="counts.js"></script>
+    <script src="bchart.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h3>About <a href="index.html">Baby Names</a></h3>
+
+<p>This app lets you search for baby names and view their popularity trends over
+the past 134 years. In addition, it shows alternative spellings and other names
+that sound like your search. The "sounds like" results are based on
+<a href="http://en.wikipedia.org/wiki/Metaphone">Double Metaphone</a>
+and the "trends like" results are based on
+<a href="http://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a>
+(i.e., between the distributions).</p>
+
+<p>The original <a href="http://www.ssa.gov/oact/babynames/limits.html">
+babynames data</a> is maintained by the US Social Security Administration.
+For each year since 1880, they provide a plain text file in this format:</p>
+
+<table>
+<tr>
+<th width="33%">yob2011.txt</th>
+<th width="34%">yob2012.txt</th>
+<th width="33%">yob2013.txt</th>
+</tr>
+<tr>
+<td><pre class="info">
+Sophia,F,21799
+Isabella,F,19850
+Emma,F,18761
+...
+</pre></td>
+<td><pre class="info">
+Sophia,F,22245
+Emma,F,20871
+Isabella,F,19026
+...
+</pre></td>
+<td><pre class="info">
+Sophia,F,21075
+Emma,F,20788
+Olivia,F,18256
+...
+</pre></td>
+</tr>
+</table>
+
+<p>In order to visualize the data, I wrote a Python script to combine the
+individual text files into a single JavaScript object. For each name, I store
+how many times it occurs in each year:</p>
+
+<table><tr><td>
+<pre class="info">
+f_counts = {
+    ...
+    'Sophia': [..., 21799, 22245, 21075],
+    ...
+};
+</pre>
+</td></tr></table>
+
+<p>Using this format, I wrote a JavaScript function to draw a bar chart in an
+HTML5 canvas. The x-axis ranges from 1880 to 2013 (year of birth) and the y-axis
+ranges from 0% to 0.3% (percent of births with that gender). Darker colors
+indicate higher percent values for the more popular names.</p>
+
+<p>Here are the top 10 names for 2013 (see also
+<a href="http://www.ssa.gov/oact/babynames">Popular Baby Names</a>
+on the SSA website). Hover your mouse over the charts for more details.</p>
+
+<table>
+<tr>
+    <td><table id="t1"></table></td>
+    <td><table id="t2"></table></td>
+</tr>
+</table>
+
+<script>
+var t1 = document.getElementById("t1");
+bchart(t1, "Noah", 'M');
+bchart(t1, "Liam", 'M');
+bchart(t1, "Jacob", 'M');
+bchart(t1, "Mason", 'M');
+bchart(t1, "William", 'M');
+bchart(t1, "Ethan", 'M');
+bchart(t1, "Michael", 'M');
+bchart(t1, "Alexander", 'M');
+bchart(t1, "Jayden", 'M');
+bchart(t1, "Daniel", 'M');
+var t2 = document.getElementById("t2");
+bchart(t2, "Sophia", 'F');
+bchart(t2, "Emma", 'F');
+bchart(t2, "Olivia", 'F');
+bchart(t2, "Isabella", 'F');
+bchart(t2, "Ava", 'F');
+bchart(t2, "Mia", 'F');
+bchart(t2, "Emily", 'F');
+bchart(t2, "Abigail", 'F');
+bchart(t2, "Madison", 'F');
+bchart(t2, "Elizabeth", 'F');
+</script>
+
+<p>The original data consists of 102,690 names given to 333,417,770 people.
+For performance reasons, my app only includes names with at least 5,000
+occurrences over time. Interestingly, this subset represents 92.3% of the
+population but only 3.58% of the names.</p>
+
+<table border="1" style="border-collapse: separate; text-align: right;">
+<tr style="background-color: ghostwhite; text-align: center">
+    <th width="25%"></th>
+    <th width="25%">Male</th>
+    <th width="25%">Female</th>
+    <th width="25%">Total</th>
+</tr>
+<tr>
+    <td><p>Total People</p></td>
+    <td>168,137,041</td>
+    <td>165,280,729</td>
+    <td>333,417,770</td>
+</tr>
+<tr>
+    <td><p>Total Names</p></td>
+    <td>38,601</td>
+    <td>64,089</td>
+    <td>102,690</td>
+</tr>
+<tr>
+    <td><p>&nbsp;Included People</p></td>
+    <td>158,153,848<br><font size="-1" color="forestgreen">94.1%</font></td>
+    <td>149,740,917<br><font size="-1" color="forestgreen">90.6%</font></td>
+    <td>307,894,765<br><font size="-1" color="forestgreen">92.3%</font></td>
+</tr>
+<tr>
+    <td><p>&nbsp;Included Names</p></td>
+    <td>1,486<br><font size="-1" color="forestgreen">3.85%</font></td>
+    <td>2,187<br><font size="-1" color="forestgreen">3.41%</font></td>
+    <td>3,673<br><font size="-1" color="forestgreen">3.58%</font></td>
+</tr>
+</table>
+
+<p style="color: gray"><i>
+Copyright &copy; 2014 Chris Mayfield. Software released under the
+<a href="http://opensource.org/licenses/MIT">MIT license</a>.
+</i></p>
+
+</body>
+</html>

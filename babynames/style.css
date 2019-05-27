@@ -1,0 +1,18 @@
+A:link    {text-decoration: none}
+A:visited {text-decoration: none}
+A:active  {text-decoration: none}
+A:hover   {text-decoration: underline}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 0px 10px 0px 0px;
+}
+
+.info {
+    background-color: lightyellow;
+    border: 1px solid black;
+    padding: 5px;
+}
