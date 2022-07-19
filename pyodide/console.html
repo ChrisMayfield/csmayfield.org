@@ -231,6 +231,18 @@
         if (searchParams.has("noblink")) {
           $(".cmd-cursor").addClass("noblink");
         }
+
+        // run provided Python code
+        let code = searchParams.get("code");
+        let show = searchParams.get("show");
+        if (code) {
+          if (show) echo("");
+          for (const line of code.split("\n")) {
+            if (show) echo(line);
+            pyodide.runPython(line);
+          }
+          if (show) echo("");
+        }
       }
       window.console_ready = main();
     </script>
