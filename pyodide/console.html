@@ -62,12 +62,13 @@
     </style>
   </head>
   <body>
+    <button onclick="style.display = 'none'; main();">Run shell</button>
 <!--
     <div id="jquery-terminal-logo">
       <a href="https://terminal.jcubic.pl/">jQuery Terminal</a>
     </div>
 -->
-    <div id="loading"></div>
+    <div id="loading" style="display: none;"></div>
     <script>
       "use strict";
       function sleep(s) {
@@ -75,6 +76,9 @@
       }
 
       async function main() {
+        let loading = document.getElementById("loading");
+        loading.style.display = 'block';
+
         let term;
         globalThis.pyodide = await loadPyodide({
           stdin: () => {
@@ -245,7 +249,7 @@
           if (show) echo("");
         }
       }
-      window.console_ready = main();
+      // window.console_ready = main();
     </script>
   </body>
 </html>
